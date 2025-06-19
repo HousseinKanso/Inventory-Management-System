@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block title %}Search Inventory{% endblock %} {%
+block content %}
+<h2>Search Inventory</h2>
+<form method="get">
+  <label
+    >Name:
+    <input
+      type="text"
+      name="name"
+      value="{{ request.query_params.get('name', '') }}"
+  /></label>
+  <label
+    >Category:
+    <input
+      type="text"
+      name="category"
+      value="{{ request.query_params.get('category', '') }}"
+  /></label>
+  <label
+    >Status:
+    <select name="status">
+      <option value="">Any</option>
+      <option value="in stock">in stock</option>
+      <option value="low stock">low stock</option>
+      <option value="ordered">ordered</option>
+      <option value="discontinued">discontinued</option>
+    </select>
+  </label>
+  <button type="submit">Search</button>
+</form>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Category</th>
+    <th>Status</th>
+  </tr>
+  {% for item in items %}
+  <tr>
+    <td>{{ item.name }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>{{ item.category }}</td>
+    <td>{{ item.status.value }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

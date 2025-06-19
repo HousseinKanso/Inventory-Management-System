@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Edit Item{% endblock %}
+{% block content %}
+<h2>Edit Inventory Item</h2>
+{% if success %}
+  <div class="flash">{{ success }}</div>
+{% endif %}
+<form method="post">
+    <label>Name: <input type="text" name="name" value="{{ item.name }}" required></label><br>
+    <label>Quantity: <input type="number" name="quantity" min="0" value="{{ item.quantity }}" required></label><br>
+    <label>Category: <input type="text" name="category" value="{{ item.category }}" required></label><br>
+    <label>Status:
+        <select name="status" required>
+            {% for s in statuses %}
+            <option value="{{ s }}" {% if item.status.value == s %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <button type="submit">Save Changes</button>
+</form>
+{% endblock %} 

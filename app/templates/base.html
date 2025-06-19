@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Inventory System{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    {% if request.url.path == '/chat' %}
+    <link rel="stylesheet" href="/static/chatbot.css" />
+    {% endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Inventory Management System</h1>
+      </div>
+    </header>
+    {% if request.url.path != '/login' and request.url.path != '/signup' %}
+    <nav>
+      <div class="container nav-flex">
+        {% if request.session.get('user') %}
+        <a href="/dashboard">Dashboard</a>
+        <a href="/search">Search</a>
+        {% if request.session.get('role') == 'admin' %}
+        <a href="/add">Add Item</a>
+        {% endif %} {% if request.session.get('role') == 'viewer' %}
+        <a href="/chat">Chat Assistant</a>
+        {% endif %}
+        <span class="nav-spacer"></span>
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a class="disabled" href="#" onclick="return false;">Dashboard</a>
+        <a class="disabled" href="#" onclick="return false;">Search</a>
+        <span class="nav-spacer"></span>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+        {% endif %}
+      </div>
+    </nav>
+    {% endif %}
+    <div class="container">
+      {% block flash %}{% endblock %}
+      <main>{% block content %}{% endblock %}</main>
+    </div>
+    <footer>
+      <div class="container">
+        <small>&copy; {{ 2024 }} Inventory Management System</small>
+      </div>
+    </footer>
+  </body>
+</html>

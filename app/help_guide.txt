@@ -1,0 +1,12 @@
+Welcome to the Inventory Management System Help Guide!
+
+As a regular user (viewer), you can:
+
+1. Log in with your username and password.
+2. View the inventory dashboard to see all items and their details.
+3. Use the search page to find items by name, category, or status.
+4. You cannot add, edit, or delete items. Only admins can do that.
+5. If you have questions about how to use the system, ask the AI Chat Assistant on the Chat page.
+6. To log out, click the Logout button in the navigation bar.
+
+If you need more help, type your question in the chat assistant! 

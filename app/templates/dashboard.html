@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block title %}Dashboard{% endblock %} {% block
+content %}
+<h2>Inventory Dashboard</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Category</th>
+    <th>Status</th>
+    {% if role == 'admin' %}
+    <th>Actions</th>
+    {% endif %}
+  </tr>
+  {% for item in items %}
+  <tr>
+    <td>{{ item.name }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>{{ item.category }}</td>
+    <td>
+      {% if item.status.value is defined %}{{ item.status.value }}{% else %}{{
+      item.status }}{% endif %}
+    </td>
+    {% if role == 'admin' %}
+    <td>
+      <a href="/edit/{{ item.id }}">Edit</a> |
+      <a
+        href="/delete/{{ item.id }}"
+        onclick="return confirm('Delete this item?');"
+        >Delete</a
+      >
+    </td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+</table>
+{% if role == 'admin' %}
+<p><a href="/add">Add New Item</a></p>
+{% endif %} {% endblock %}
